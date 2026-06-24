@@ -1,0 +1,99 @@
+cff-version: 1.2.0
+message: "If you use PyLCF, please cite it as below."
+title: "PyLCF: a graphical tool for Linear Combination Fitting of 1-D data"
+version: 1.0.0
+date-released: 2026-06-10
+authors:
+  - family-names: Knauer
+    given-names: Lukas
+    affiliation: "AG Schünemann, RPTU Kaiserslautern-Landau"
+license: MIT
+keywords:
+  - linear combination fitting
+  - spectroscopy
+  - NIS
+  - NRVS
+  - XAFS
+references:
+  - type: book
+    authors:
+      - family-names: Lawson
+        given-names: "Charles L."
+      - family-names: Hanson
+        given-names: "Richard J."
+    title: "Solving Least Squares Problems"
+    publisher: SIAM
+    year: 1995
+  - type: report
+    authors:
+      - family-names: Kraft
+        given-names: Dieter
+    title: "A Software Package for Sequential Quadratic Programming"
+    institution: "DLR (DFVLR-FB 88-28)"
+    year: 1988
+  - type: book
+    authors:
+      - family-names: Efron
+        given-names: Bradley
+      - family-names: Tibshirani
+        given-names: "Robert J."
+    title: "An Introduction to the Bootstrap"
+    publisher: "Chapman & Hall"
+    year: 1993
+  - type: article
+    authors:
+      - family-names: Ravel
+        given-names: Bruce
+      - family-names: Newville
+        given-names: Matthew
+    title: "ATHENA, ARTEMIS, HEPHAESTUS: data analysis for X-ray absorption spectroscopy using IFEFFIT"
+    journal: "Journal of Synchrotron Radiation"
+    volume: 12
+    start: 537
+    end: 541
+    year: 2005
+    doi: 10.1107/S0909049505012719
+  - type: article
+    authors:
+      - family-names: Newville
+        given-names: Matthew
+    title: "Larch: An Analysis Package for XAFS and Related Spectroscopies"
+    journal: "Journal of Physics: Conference Series"
+    volume: 430
+    start: 012007
+    year: 2013
+    doi: 10.1088/1742-6596/430/1/012007
+  - type: article
+    authors:
+      - family-names: Harris
+        given-names: "Charles R."
+    title: "Array programming with NumPy"
+    journal: Nature
+    volume: 585
+    start: 357
+    end: 362
+    year: 2020
+    doi: 10.1038/s41586-020-2649-2
+  - type: article
+    authors:
+      - family-names: Virtanen
+        given-names: Pauli
+    title: "SciPy 1.0: fundamental algorithms for scientific computing in Python"
+    journal: "Nature Methods"
+    volume: 17
+    start: 261
+    end: 272
+    year: 2020
+    doi: 10.1038/s41592-019-0686-2
+  - type: article
+    authors:
+      - family-names: Hunter
+        given-names: "John D."
+    title: "Matplotlib: A 2D Graphics Environment"
+    journal: "Computing in Science & Engineering"
+    volume: 9
+    issue: 3
+    start: 90
+    end: 95
+    year: 2007
+    doi: 10.1109/MCSE.2007.55

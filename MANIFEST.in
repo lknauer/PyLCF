@@ -1,0 +1,5 @@
+include README.md AUTHORS LICENSE CITATION.cff CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md requirements.txt
+include pylcf/py.typed
+recursive-include docs *.md *.pdf *.png
+recursive-include examples *
+recursive-include tests *.py
