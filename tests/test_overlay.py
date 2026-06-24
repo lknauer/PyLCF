@@ -7,7 +7,8 @@ import pylcf as G
 import tkinter as tk
 from tkinter import filedialog
 
-XLSX = "/mnt/user-data/uploads/Programm_NIS-M1_M6_Spektren_Claude_ohne_negative_abgezogen.xlsx"
+# (self-contained synthetic data is built below -- no external file needed,
+#  so this test runs anywhere, GitHub Actions included)
 tmp = tempfile.mkdtemp()
 ok = []
 def check(name, cond):
@@ -16,8 +17,16 @@ def check(name, cond):
 print("APP_VERSION =", G.APP_VERSION)
 check("version 1.0.0", G.APP_VERSION == "1.0.0")
 
-# --- load real M1/M6 data ---
-sheets = G.read_excel_sheets(XLSX); (names, data) = next(iter(sheets.values()))
+# --- self-contained synthetic data in the 'XY pairs' layout (no file) ---
+_x = np.linspace(0.0, 100.0, 400)
+def _g(c, w, a):
+    return a * np.exp(-0.5 * ((_x - c) / w) ** 2)
+_m1y = _g(30, 6, 1.0) + _g(70, 8, 0.6) + 0.01
+_m6y = _g(45, 7, 0.8) + _g(80, 6, 0.5) + 0.01
+_rng = np.random.default_rng(0)
+_ny = 0.6 * _m1y + 0.4 * _m6y + 0.002 * _rng.standard_normal(_x.size)
+names = ["E", "NIS", "E", "M1", "E", "M6"]
+data = np.column_stack([_x, _ny, _x, _m1y, _x, _m6y])
 def pair(i, j):
     x, y = data[:, i], data[:, j]; m = np.isfinite(x) & np.isfinite(y); return x[m], y[m]
 nx, ny = pair(0, 1); m1x, m1y = pair(2, 3); m6x, m6y = pair(4, 5)
@@ -33,7 +42,7 @@ app.spectra = [
 app.norm.set("area"); app.mode.set("convex"); app.xmin.set("20"); app.xmax.set("")
 app.on_fit()
 check("on_fit set prep/primary", app.prep is not None and app.primary is not None)
-check("fit R2 ~0.93 (xmin=20)", abs(app.primary.gof.r_squared - 0.934) < 0.01)
+check("fit R2 good (xmin=20)", app.primary.gof.r_squared > 0.95)
 print("    weights:", dict(zip(app.primary.labels, np.round(app.primary.weights, 3))),
       " R2=%.3f" % app.primary.gof.r_squared)
 

@@ -2,14 +2,19 @@ import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 # -*- coding: utf-8 -*-
 import numpy as np, pylcf as G, tkinter as tk
-XLSX = "/mnt/user-data/uploads/Programm_NIS-M1_M6_Spektren_Claude_ohne_negative_abgezogen.xlsx"
+# Self-contained synthetic data is built below -- no external file needed,
+# so this test runs anywhere (GitHub Actions / a fresh checkout included).
 ok=[]
 def check(n,c): ok.append(c); print(("PASS" if c else "FAIL"),"-",n)
 
-sheets=G.read_excel_sheets(XLSX); (names,data)=next(iter(sheets.values()))
-def pair(i,j):
-    x,y=data[:,i],data[:,j]; m=np.isfinite(x)&np.isfinite(y); return x[m],y[m]
-nx,ny=pair(0,1); m1=pair(2,3); m6=pair(4,5)
+_x = np.linspace(0.0, 100.0, 400)
+def _g(c, w, a):
+    return a * np.exp(-0.5 * ((_x - c) / w) ** 2)
+_m1y = _g(30, 6, 1.0) + _g(70, 8, 0.6) + 0.01
+_m6y = _g(45, 7, 0.8) + _g(80, 6, 0.5) + 0.01
+_rng = np.random.default_rng(0)
+nx, ny = _x, 0.6 * _m1y + 0.4 * _m6y + 0.002 * _rng.standard_normal(_x.size)
+m1 = (_x, _m1y); m6 = (_x, _m6y)
 
 print("APP_VERSION =", G.APP_VERSION); check("version 1.0.0", G.APP_VERSION=="1.0.0")
 root=tk.Tk(); root.withdraw(); app=G.App(root)
