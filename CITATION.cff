@@ -2,6 +2,9 @@ cff-version: 1.2.0
 message: "If you use PyLCF, please cite it as below."
 title: "PyLCF: a graphical tool for Linear Combination Fitting of 1-D data"
 version: 1.0.0
+doi: 10.5281/zenodo.20836598 
+repository-code: "https://github.com/lknauer/PyLCF"
+url: "https://github.com/lknauer/PyLCF"
 date-released: 2026-06-10
 authors:
   - family-names: Knauer
